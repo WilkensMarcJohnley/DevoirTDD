@@ -19,6 +19,8 @@ class WelcomeTest {
 	private static String textEx5= "Hello, Amy, Bob, Jerry";
 	private static String textEx5_1= "Hello, Wil, John, Marc";
 	
+	private static String textEx6= "Hello, Amy, Jerry. AND HELLO, BOB !";
+	private static String textEx6_1= "Hello, Wil, John. AND HELLO, MARC !";
 	
 	@Test
 	void testEx1() {
@@ -52,6 +54,12 @@ class WelcomeTest {
 	void testEx5() {
 		assertEquals(textEx5,Welcome.welcome("amy,bob,jerry"));
 		assertEquals(textEx5_1,Welcome.welcome("wil,john,marc"));
+	}
+	
+	@Test
+	void testEx6() {
+		assertEquals(textEx6,Welcome.welcome("amy,BOB,jerry"));
+		assertEquals(textEx6_1,Welcome.welcome("wil,john,MARC"));
 	}
 
 }
