@@ -5,12 +5,24 @@ private static String FRIEND="Hello, my friend";
 	
 	public static String welcome(String entree){
 		entree=usetrim(entree);
-		if(entree!=null && (entree.trim()).length()>0) {
+		if(entree!=null && entree.length()>0) {
 			if(verifMAjuscule(entree))return "HELLO, "+ entree+" !";
-			entree=entree.substring(0, 1).toUpperCase()+entree.substring(1);
-			return "Hello, " +entree;
+			entree=gestionLowerCase(entree);
+			return entree;
 		}
 		return FRIEND;
+	}
+	
+	private static String gestionLowerCase(String entree) {
+		StringBuilder str= new StringBuilder();
+		str.append("Hello");
+		String[] texte= entree.split(",");
+		for(String nom: texte) {
+			nom=nom.substring(0, 1).toUpperCase()+nom.substring(1);
+			str.append(", ");
+			str.append(nom);
+		}
+		return str.toString();
 	}
 	
 	private static String usetrim(String entree) {
