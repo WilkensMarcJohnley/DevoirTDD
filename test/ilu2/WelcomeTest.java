@@ -29,6 +29,14 @@ class WelcomeTest {
 	// ce test couvre le cas : jERRY (Tout en majuscule sauf une lettre)
 	private static String textEx7_4="Hello, Wil and JERRY. AND HELLO, MARC AND JOHN !";
 	
+	private static String textEx8="Hello, Messi and Ronaldo";
+	private static String textEx8_2="Hello, Bob and Jerry. AND HELLO, AMY AND JACK !";
+	private static String textEx8_3="Hello, 1wil and John";
+	private static String textEx8_4="Hello, 1wil and John. AND HELLO, MARC2 AND 3VIDO !";
+	private static String textEx8_5="Hello, 1wil and 10john. AND HELLO, MARC2 AND 3VIDO !";
+	//si la chaine de caractere ne contient que des chiffres, elle est considere comme un nom majuscule
+	private static String textEx8_6="HELLO, 123 AND 122 !";
+	
 	@Test
 	void testEx1() {
 		assertEquals(textBob, Welcome.welcome("bob"));
@@ -76,6 +84,20 @@ class WelcomeTest {
 		assertEquals(textEx7_2,Welcome.welcome("WIL,JOHN"));
 		assertEquals(textEx7_3,Welcome.welcome("MARC,WIL,JOHN"));
 		assertEquals(textEx7_4,Welcome.welcome("wil,MARC,jERRY,JOHN"));
+	}
+	
+	@Test
+	void testEx8() {
+		assertEquals(textEx4,Welcome.welcome("  amy  ,bob  "));
+		assertEquals(textEx8,Welcome.welcome("  messi  ,Ronaldo  "));
+		assertEquals(textEx7_1,Welcome.welcome("bob , AMY , jerry, JACK "));
+		assertEquals(textEx7_2,Welcome.welcome("WIL , JOHN "));
+		assertEquals(textEx7_3,Welcome.welcome(" MARC, WIL ,JOHN "));
+		assertEquals(textEx8_3,Welcome.welcome(" 1wil, john "));
+		assertEquals(textEx8_4,Welcome.welcome(" 1wil, MARC2, 3VIDO, john "));
+		assertEquals(textEx8_5,Welcome.welcome(" 1wil, MARC2, 3VIDO, 10john "));
+		//si la chaine de caractere ne contient que des chiffres, elle est considere comme un nom majuscule
+		assertEquals(textEx8_6,Welcome.welcome(" 123,122 "));
 	}
 
 }

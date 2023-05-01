@@ -23,6 +23,7 @@ private static String FRIEND="Hello, my friend";
 	private static void diviseString(StringBuilder upercase, StringBuilder lowercase, String entree) {
 		String[] texte= entree.split(",");
 		for(String word: texte) {
+			word=word.trim();
 			if(verifMAjuscule(word)) {
 				upercase.append(word);
 				upercase.append(",");
