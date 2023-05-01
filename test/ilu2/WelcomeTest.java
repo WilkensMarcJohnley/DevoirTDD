@@ -1,7 +1,7 @@
 package ilu2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +36,19 @@ class WelcomeTest {
 	private static String textEx8_5="Hello, 1wil and 10john. AND HELLO, MARC2 AND 3VIDO !";
 	//si la chaine de caractere ne contient que des chiffres, elle est considere comme un nom majuscule
 	private static String textEx8_6="HELLO, 123 AND 122 !";
+	
+	private static String textEx9="Hello, Bob (x3) and Amy. AND HELLO, JERRY (x2) !";
+	private static String textEx9_1= "Hello, Bob (x3)";
+	private static String textEx9_2= "Hello, Bob (x2) and Bob. AND HELLO, JOHN (x2) AND WIL !";
+	private static String textEx9_3="HELLO, JOHN (x3) AND WIL !";
+
+	
+	
+	@Test
+	void testconstructeur() {
+		Welcome bien= new Welcome();
+		assertTrue(bien!=null);
+	}
 	
 	@Test
 	void testEx1() {
@@ -100,4 +113,12 @@ class WelcomeTest {
 		assertEquals(textEx8_6,Welcome.welcome(" 123,122 "));
 	}
 
+	@Test
+	void testEx9() {
+		assertEquals(textEx9,Welcome.welcome("bob, JERRY, amy, bob, JERRY, bob"));
+		assertEquals(textEx9_1,Welcome.welcome("bob, bob,bob"));
+		assertEquals(textEx9_2,Welcome.welcome("bob, Bob,JOHN, bob,JOHN, WIL"));
+		assertEquals(textEx9_3,Welcome.welcome("JOHN, JOHN, WIL, JOHN"));
+		
+	}
 }

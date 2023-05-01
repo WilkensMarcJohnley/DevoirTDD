@@ -22,16 +22,47 @@ private static String FRIEND="Hello, my friend";
 	
 	private static void diviseString(StringBuilder upercase, StringBuilder lowercase, String entree) {
 		String[] texte= entree.split(",");
+		int count;
 		for(String word: texte) {
+			if(word.length()>0) {
 			word=word.trim();
+			count=nbOcur(word, texte);
 			if(verifMAjuscule(word)) {
 				upercase.append(word);
+				upercase.append(uperOrlowercaseAjout(count));
 				upercase.append(",");
 			}else {
 				lowercase.append(word);
+				lowercase.append(uperOrlowercaseAjout(count));
 				lowercase.append(",");
 			}
+			}
 		}
+	}
+	
+	private static String uperOrlowercaseAjout(int count) {
+		StringBuilder str= new StringBuilder();
+		str.append("");
+		if(count>1) {
+			str.append(" (x");
+			str.append(count+"");
+			str.append(")");
+		}
+		
+		return str.toString();
+	}
+	
+	
+	private static int nbOcur(String mot, String[] texte) {
+		int count=0;
+		for(int i=0;i<texte.length;i++) {
+			texte[i]=texte[i].trim();
+			if(mot.equals(texte[i])) {
+				texte[i]="";
+				++count;
+			}
+		}
+		return count;
 	}
 	
 	private static String gestionLowerCase(String entree){
