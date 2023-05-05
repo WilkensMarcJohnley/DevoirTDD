@@ -1,6 +1,7 @@
 package ilu2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -39,10 +40,14 @@ class WelcomeTest {
 	
 	private static String textEx9="Hello, Bob (x3) and Amy. AND HELLO, JERRY (x2) !";
 	private static String textEx9_1= "Hello, Bob (x3)";
-	private static String textEx9_2= "Hello, Bob (x2) and Bob. AND HELLO, JOHN (x2) AND WIL !";
+	private static String textEx9_2= "Hello, Bob (x3). AND HELLO, JOHN (x2) AND WIL !";
 	private static String textEx9_3="HELLO, JOHN (x3) AND WIL !";
 
-	
+	private static String textEx10= "Bob, Yoda and Amy, Hello. AND HELLO, JERRY !";
+	private static String textEx10_1= "Hello, Bob and Amy. AND YODA (x2) AND JERRY, HELLO !";
+	private static String textEx10_2= "Bob, Yoda (x3) and Wil, Hello. AND YODA, MARC AND JOHN (x2), HELLO !";
+	private static String textEx10_3= "Yoda (x3), Hello. AND YODA (x2), HELLO !";
+	private static String textEx10_4="Messi, Ronaldo and Yoda (x4), Hello. AND XAVI, YES AND YODA, HELLO !";
 	
 	@Test
 	void testconstructeur() {
@@ -119,6 +124,14 @@ class WelcomeTest {
 		assertEquals(textEx9_1,Welcome.welcome("bob, bob,bob"));
 		assertEquals(textEx9_2,Welcome.welcome("bob, Bob,JOHN, bob,JOHN, WIL"));
 		assertEquals(textEx9_3,Welcome.welcome("JOHN, JOHN, WIL, JOHN"));
-		
+	}
+	
+	@Test
+	void testEx10() {
+		assertEquals(textEx10,Welcome.welcome("bob ,yoda ,amy,JERRY"));
+		assertEquals(textEx10_1,Welcome.welcome("bob,YODA,amy,JERRY,YODA"));
+		assertEquals(textEx10_2,Welcome.welcome("bob , yoda, wil, Yoda,YODA,MARC, yoda, JOHN ,JOHN"));
+		assertEquals(textEx10_3,Welcome.welcome(" yoda,YODA , Yoda,yoda , YODA "));
+		assertEquals(textEx10_4,Welcome.welcome(" messi,ronaldo, yoda,XAVI ,Yoda , yoda, YES,yoda,YODA "));
 	}
 }

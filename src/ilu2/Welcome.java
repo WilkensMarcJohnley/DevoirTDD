@@ -2,6 +2,8 @@ package ilu2;
 
 public class Welcome {
 private static String FRIEND="Hello, my friend";
+private static boolean yodaLowercasePresent=false;
+private static boolean yodaUperercasePresent=false;
 	
 	public static String welcome(String entree){
 		entree=usetrim(entree);
@@ -54,10 +56,11 @@ private static String FRIEND="Hello, my friend";
 	
 	
 	private static int nbOcur(String mot, String[] texte) {
+		verifierYoda(mot);
 		int count=0;
 		for(int i=0;i<texte.length;i++) {
 			texte[i]=texte[i].trim();
-			if(mot.equals(texte[i])) {
+			if(mot.equals(texte[i])|| texte[i].equals((mot.substring(0, 1).toUpperCase())+mot.substring(1))) {
 				texte[i]="";
 				++count;
 			}
@@ -65,9 +68,14 @@ private static String FRIEND="Hello, my friend";
 		return count;
 	}
 	
+	private static void verifierYoda(String mot) {
+		if(mot.equals("yoda")|| mot.equals("Yoda")) yodaLowercasePresent=true;
+		else if(mot.equals("YODA")) yodaUperercasePresent=true;
+	} 
+	
 	private static String gestionLowerCase(String entree){
 		StringBuilder str= new StringBuilder();
-		str.append("Hello");
+		if(!yodaLowercasePresent)str.append("Hello");
 		String[] texte= entree.split(",");
 		if(texte.length<=1) {
 		for(String nom: texte) {
@@ -75,8 +83,11 @@ private static String FRIEND="Hello, my friend";
 			str.append(", ");
 			str.append(nom);
 		}
-		}else {
-			str.append(lowercaseplusieursNoms(texte));
+		}else str.append(lowercaseplusieursNoms(texte));
+		if(yodaLowercasePresent) {
+			str.append(", Hello");
+			yodaLowercasePresent=false;
+			return str.toString().substring(2);
 		}
 		return str.toString();
 	}
@@ -99,15 +110,18 @@ private static String FRIEND="Hello, my friend";
 	
 	private static String gestionUperCase(String entree){
 		StringBuilder str= new StringBuilder();
-		str.append("HELLO");
+		if(!yodaUperercasePresent) str.append("HELLO");
 		String[] texte= entree.split(",");
 		if(texte.length<=1) {
 		for(String nom: texte) {
 			str.append(", ");
 			str.append(nom);
 		}
-		}else {
-			str.append(uppercaseplusieursNoms(texte));
+		}else str.append(uppercaseplusieursNoms(texte));
+		if(yodaUperercasePresent) {
+			str.append(", HELLO !");
+			yodaUperercasePresent=false;
+			return str.toString().substring(2);
 		}
 		if(str.length()>0) str.append(" !");
 		return str.toString();
